@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class ProductPage extends StatelessWidget {
   final String title;
+  final double price;
+  final String description;
   final String imageUrl;
 
-  ProductPage(this.title, this.imageUrl);
-
+  ProductPage(this.title, this.price, this.description, this.imageUrl);
+/* 
   _showWarningDialog(BuildContext context) {
     showDialog(
         context: context,
@@ -31,7 +33,7 @@ class ProductPage extends StatelessWidget {
             ],
           );
         });
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -48,20 +50,45 @@ class ProductPage extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Image.asset(imageUrl),
               Container(
-                padding: EdgeInsets.all(10.0),
-                child: Text(title),
-              ),
-              Container(
                   padding: EdgeInsets.all(10.0),
-                  child: RaisedButton(
-                    color: Theme.of(context).accentColor,
-                    child: Text('DELETE'),
-                    onPressed: () =>_showWarningDialog(context),
-                  ))
+                  child: Container(
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                          fontSize: 26.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Oswald'),
+                    ),
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Union Square San Francisco',
+                    style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Text(
+                      '|',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Text(
+                    '\$' + price.toString(),
+                    style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                description,
+              ),
             ],
           ),
         ),
