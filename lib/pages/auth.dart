@@ -24,14 +24,21 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   Widget _buildEmailTextField() {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(
         labelText: 'Email',
         filled: true,
         fillColor: Colors.white,
       ),
       keyboardType: TextInputType.emailAddress,
-      onChanged: (String value) {
+      validator: (String value) {
+        if (value.isEmpty ||
+            !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                .hasMatch(value)) {
+          return 'Not a valid email address!';
+        }
+      },
+      onSaved: (String value) {
         setState(() {
           _emailValue = value;
         });
@@ -40,14 +47,14 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   Widget _buildPasswordTextField() {
-    return TextField(
+    return TextFormField(
       obscureText: true,
       decoration: InputDecoration(
         labelText: 'Password',
         filled: true,
         fillColor: Colors.white,
       ),
-      onChanged: (String value) {
+      onSaved: (String value) {
         setState(() {
           _passwordValue = value;
         });
@@ -90,21 +97,23 @@ class _AuthPageState extends State<AuthPage> {
             child: SingleChildScrollView(
               child: Container(
                 width: targetWidth,
-                child: Column(
-                  children: <Widget>[
-                    _buildEmailTextField(),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    _buildPasswordTextField(),
-                    _buildAcceptSwitch(),
-                    SizedBox(height: 10.0),
-                    RaisedButton(
-                      child: Text('Login'),
-                      textColor: Colors.white,
-                      onPressed: _submitForm,
-                    )
-                  ],
+                child: Form(
+                  child: Column(
+                    children: <Widget>[
+                      _buildEmailTextField(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      _buildPasswordTextField(),
+                      _buildAcceptSwitch(),
+                      SizedBox(height: 10.0),
+                      RaisedButton(
+                        child: Text('Login'),
+                        textColor: Colors.white,
+                        onPressed: _submitForm,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
