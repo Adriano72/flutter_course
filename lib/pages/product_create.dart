@@ -18,9 +18,6 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
     'price': null,
     'image': 'assets/food.jpg',
   };
-  String _titleValue = '';
-  String _descriptionValue = '';
-  double _priceValue;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Widget _buildTitleTextField() {
