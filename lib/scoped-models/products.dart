@@ -43,6 +43,7 @@ class ProductsModel extends Model {
       title: selectedProduct.title,
       description: selectedProduct.description,
       price: selectedProduct.price,
+      image: selectedProduct.image,
       isFavorite: newFavoriteStatus,
     );
     _products[_selectedProductIndex] = updatedProduct;
