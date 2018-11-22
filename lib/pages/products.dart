@@ -35,7 +35,7 @@ class ProductsPage extends StatelessWidget {
         actions: <Widget>[
           ScopedModelDescendant<ProductsModel>(
             builder: (BuildContext context, Widget child, ProductsModel model) {
-              IconButton(
+              return IconButton(
                 icon: Icon(model.displayFavoritesOnly
                     ? Icons.favorite
                     : Icons.favorite_border),
@@ -44,7 +44,7 @@ class ProductsPage extends StatelessWidget {
                 },
               );
             },
-          ),
+          )
         ],
       ),
       body: Products(),
