@@ -1,31 +1,31 @@
 import 'package:scoped_model/scoped_model.dart';
 
 import '../models/product.dart';
+import './connected_product.dart';
 
-mixin ProductsModel on Model {
-  int _selectedProductIndex;
+mixin ProductsModel on ConnectedProducts {
   bool _showFavorites = false;
 
   List<Product> get products {
-    return List.from(_products);
+    return List.from(products);
   }
 
   List<Product> get displayedProducts {
     if(_showFavorites) {
-      return _products.where((Product product) => product.isFavorite).toList();
+      return products.where((Product product) => product.isFavorite).toList();
     }
-    return List.from(_products);
+    return List.from(products);
   }
 
   int get selectedProductIndex {
-    return _selectedProductIndex;
+    return selectedProductIndex;
   }
 
   Product get selectedProduct {
-    if (_selectedProductIndex == null) {
+    if (selectedProductIndex == null) {
       return null;
     }
-    return _products[_selectedProductIndex];
+    return products[selectedProductIndex];
   }
 
   bool get displayFavoritesOnly {
@@ -35,14 +35,14 @@ mixin ProductsModel on Model {
   
 
   void updateProduct(Product product) {
-    _products[_selectedProductIndex] = product;
-    _selectedProductIndex = null;
+    products[selectedProductIndex] = product;
+    selectedProductIndex = null;
     notifyListeners();
   }
 
   void deleteProduct() {
-    _products.removeAt(_selectedProductIndex);
-    _selectedProductIndex = null;
+    products.removeAt(selectedProductIndex);
+    selectedProductIndex = null;
     notifyListeners();
   }
 
@@ -56,14 +56,14 @@ mixin ProductsModel on Model {
       image: selectedProduct.image,
       isFavorite: newFavoriteStatus,
     );
-    _products[_selectedProductIndex] = updatedProduct;
-    _selectedProductIndex = null;
+    products[selectedProductIndex] = updatedProduct;
+    selectedProductIndex = null;
     notifyListeners();
-    _selectedProductIndex = null;
+    selectedProductIndex = null;
   }
 
   void selectProduct(int index) {
-    _selectedProductIndex = index;
+    selectedProductIndex = index;
     notifyListeners();
   }
 
