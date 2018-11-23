@@ -3,7 +3,6 @@ import 'package:scoped_model/scoped_model.dart';
 import '../models/product.dart';
 
 mixin ProductsModel on Model {
-  List<Product> _products = [];
   int _selectedProductIndex;
   bool _showFavorites = false;
 
@@ -33,11 +32,7 @@ mixin ProductsModel on Model {
     return _showFavorites;
   }
 
-  void addProduct(product) {
-    _products.add(product);
-    _selectedProductIndex = null;
-    notifyListeners();
-  }
+  
 
   void updateProduct(Product product) {
     _products[_selectedProductIndex] = product;
