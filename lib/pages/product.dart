@@ -53,7 +53,7 @@ class ProductPage extends StatelessWidget {
             body: Center(
               child: Column(
                 children: <Widget>[
-                  Image.asset(product.image),
+                  Image.network(product.image),
                   Container(
                     padding: EdgeInsets.all(10.0),
                     child: Container(
